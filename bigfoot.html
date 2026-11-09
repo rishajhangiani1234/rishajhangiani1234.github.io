@@ -1,0 +1,26 @@
+---
+layout: null
+permalink: /bigfoot/
+---
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Bigfoot Reports | IS 445</title>
+<script src="https://cdn.jsdelivr.net/npm/vega@6"></script><script src="https://cdn.jsdelivr.net/npm/vega-lite@6"></script><script src="https://cdn.jsdelivr.net/npm/vega-embed@7"></script>
+<style>body{font:17px/1.7 system-ui,sans-serif;color:#1c3340;background:#f4f7f8;margin:0}main{max-width:900px;margin:45px auto;padding:24px}h1{font-size:42px;line-height:1.15}h2{margin-top:42px}section{background:white;padding:24px;border-radius:14px;margin:24px 0;overflow-x:auto}a{color:#116b80}.button{display:inline-block;padding:9px 18px;background:#116b80;color:white;border-radius:6px;margin-right:10px;text-decoration:none}.note{color:#526671;font-size:15px}.vega-bindings{margin-top:15px}select{padding:7px}</style></head>
+<body><main><p>IS 445 · Python / Altair / Vega-Lite</p><h1>Bigfoot reports:<br>geography and seasonality</h1>
+<p>Exploring the BFRO reports dataset provided for this course.</p>
+<a class="button" href="https://raw.githubusercontent.com/UIUC-iSchool-DataViz/is445_data/main/bfro_reports_fall2022.csv">The Data</a>
+<a class="button" href="https://github.com/rishajhangiani1234/rishajhangiani1234.github.io/blob/main/notebooks/bigfoot_analysis.ipynb">The Analysis</a>
+<section><h2>1. Which states have the most reports?</h2><div id="states"></div>
+<p>This horizontal bar chart compares report counts for the 15 states with the most reports in the dataset. State is encoded as nominal data on the y-axis, while the report count is quantitative on the x-axis. The bars begin at zero so their lengths allow a direct comparison. I used a constant teal color because the bars already identify states by position, and an additional color variable would add unnecessary complexity. In Python, I trimmed whitespace in the categorical columns, removed records without a state, identified the top 15 states using all classifications, and grouped records by state and classification. I also created overall counts and filled missing state-classification combinations with zeros. The same 15 states remain available when filtering, although their order changes to reflect the selected counts.</p>
+</section>
+<section><h2>2. How do seasonal patterns vary by state?</h2><div id="seasons"></div>
+<p>This heatmap shows the seasonal distribution of reports within the same 15 states. State is nominal on the y-axis, season is ordinal on the x-axis in Winter–Spring–Summer–Fall order, and the share of reports is quantitative in the color encoding. I chose a sequential blue color scheme, with darker cells representing larger shares, because percentages have a natural low-to-high order. A fixed 0–100% scale makes colors comparable across states. In Python, I retained reports with one of the four recognized seasons, grouped them by state and season, filled absent combinations with zero counts, and divided each count by that state's total number of reports with a recognized season. This normalization makes it easier to compare seasonal composition across states with different report totals. Tooltips include both the percentage and the underlying counts.</p>
+</section>
+<h2>Interactivity</h2><p>The first plot includes a classification dropdown that filters the bars and updates their ranking. This lets readers compare the geographic distribution of report classifications without overlaying several series. This is a parameter-driven filter beyond pan and zoom. Both plots also provide hover tooltips for exact values.</p>
+<p class="note">These are counts of reports in this dataset, not verified Bigfoot sightings. They are not adjusted for state population, area, reporting access, or observation effort. The seasonal percentages exclude missing or unrecognized seasons and describe only the selected states.</p><p id="error" role="alert"></p>
+<script>
+Promise.all([
+vegaEmbed('#states', '{{ "/assets/state_reports.json" | relative_url }}', {actions: false}),
+vegaEmbed('#seasons', '{{ "/assets/season_heatmap.json" | relative_url }}', {actions: false})
+]).catch(error => {document.getElementById('error').textContent='Charts could not load. Please reload the page.';console.error(error);});
+</script></main></body></html>

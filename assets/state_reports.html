@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <style>
+    #vis.vega-embed {
+      width: 100%;
+      display: flex;
+    }
+
+    #vis.vega-embed details,
+    #vis.vega-embed details summary {
+      position: relative;
+    }
+  </style>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/vega@6"></script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/vega-lite@6.4.1"></script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/vega-embed@7"></script>
+</head>
+<body>
+  <div id="vis"></div>
+  <script>
+    (function(vegaEmbed) {
+      var spec = {"config": {"view": {"continuousWidth": 300, "continuousHeight": 300, "stroke": null}}, "data": {"name": "data-8903dcd9cf2ef72ecb61e10cadbfc6b5"}, "mark": {"type": "bar", "color": "#167d8d", "cornerRadiusEnd": 3}, "encoding": {"tooltip": [{"field": "state", "title": "State", "type": "nominal"}, {"field": "classification", "title": "Classification", "type": "nominal"}, {"field": "reports", "format": ",", "title": "Reports", "type": "quantitative"}], "x": {"field": "reports", "scale": {"zero": true}, "title": "Number of reports", "type": "quantitative"}, "y": {"field": "state", "sort": "-x", "title": null, "type": "nominal"}}, "height": 440, "params": [{"name": "classification_filter", "bind": {"input": "select", "options": ["All", "Class A", "Class B", "Class C"], "name": "Report classification: "}, "value": "All"}], "title": "Reports in the 15 most-reported states", "transform": [{"filter": "(datum.classification === classification_filter)"}], "width": 650, "$schema": "https://vega.github.io/schema/vega-lite/v6.4.1.json", "datasets": {"data-8903dcd9cf2ef72ecb61e10cadbfc6b5": [{"state": "California", "reports": 402, "classification": "All"}, {"state": "Colorado", "reports": 121, "classification": "All"}, {"state": "Florida", "reports": 292, "classification": "All"}, {"state": "Georgia", "reports": 121, "classification": "All"}, {"state": "Illinois", "reports": 232, "classification": "All"}, {"state": "Kentucky", "reports": 112, "classification": "All"}, {"state": "Michigan", "reports": 208, "classification": "All"}, {"state": "Missouri", "reports": 141, "classification": "All"}, {"state": "New York", "reports": 102, "classification": "All"}, {"state": "Ohio", "reports": 276, "classification": "All"}, {"state": "Oregon", "reports": 241, "classification": "All"}, {"state": "Pennsylvania", "reports": 111, "classification": "All"}, {"state": "Texas", "reports": 215, "classification": "All"}, {"state": "Washington", "reports": 563, "classification": "All"}, {"state": "West Virginia", "reports": 100, "classification": "All"}, {"state": "Washington", "reports": 233, "classification": "Class A"}, {"state": "Washington", "reports": 327, "classification": "Class B"}, {"state": "Washington", "reports": 3, "classification": "Class C"}, {"state": "California", "reports": 175, "classification": "Class A"}, {"state": "California", "reports": 222, "classification": "Class B"}, {"state": "California", "reports": 5, "classification": "Class C"}, {"state": "Florida", "reports": 149, "classification": "Class A"}, {"state": "Florida", "reports": 143, "classification": "Class B"}, {"state": "Florida", "reports": 0, "classification": "Class C"}, {"state": "Ohio", "reports": 146, "classification": "Class A"}, {"state": "Ohio", "reports": 129, "classification": "Class B"}, {"state": "Ohio", "reports": 1, "classification": "Class C"}, {"state": "Oregon", "reports": 111, "classification": "Class A"}, {"state": "Oregon", "reports": 130, "classification": "Class B"}, {"state": "Oregon", "reports": 0, "classification": "Class C"}, {"state": "Illinois", "reports": 119, "classification": "Class A"}, {"state": "Illinois", "reports": 109, "classification": "Class B"}, {"state": "Illinois", "reports": 4, "classification": "Class C"}, {"state": "Texas", "reports": 125, "classification": "Class A"}, {"state": "Texas", "reports": 88, "classification": "Class B"}, {"state": "Texas", "reports": 2, "classification": "Class C"}, {"state": "Michigan", "reports": 97, "classification": "Class A"}, {"state": "Michigan", "reports": 111, "classification": "Class B"}, {"state": "Michigan", "reports": 0, "classification": "Class C"}, {"state": "Missouri", "reports": 75, "classification": "Class A"}, {"state": "Missouri", "reports": 66, "classification": "Class B"}, {"state": "Missouri", "reports": 0, "classification": "Class C"}, {"state": "Georgia", "reports": 60, "classification": "Class A"}, {"state": "Georgia", "reports": 61, "classification": "Class B"}, {"state": "Georgia", "reports": 0, "classification": "Class C"}, {"state": "Colorado", "reports": 72, "classification": "Class A"}, {"state": "Colorado", "reports": 49, "classification": "Class B"}, {"state": "Colorado", "reports": 0, "classification": "Class C"}, {"state": "Kentucky", "reports": 66, "classification": "Class A"}, {"state": "Kentucky", "reports": 45, "classification": "Class B"}, {"state": "Kentucky", "reports": 1, "classification": "Class C"}, {"state": "Pennsylvania", "reports": 68, "classification": "Class A"}, {"state": "Pennsylvania", "reports": 43, "classification": "Class B"}, {"state": "Pennsylvania", "reports": 0, "classification": "Class C"}, {"state": "New York", "reports": 39, "classification": "Class A"}, {"state": "New York", "reports": 63, "classification": "Class B"}, {"state": "New York", "reports": 0, "classification": "Class C"}, {"state": "West Virginia", "reports": 54, "classification": "Class A"}, {"state": "West Virginia", "reports": 46, "classification": "Class B"}, {"state": "West Virginia", "reports": 0, "classification": "Class C"}]}};
+      var embedOpt = {"mode": "vega-lite"};
+
+      function showError(el, error){
+          el.innerHTML = ('<div style="color:red;">'
+                          + '<p>JavaScript Error: ' + error.message + '</p>'
+                          + "<p>This usually means there's a typo in your chart specification. "
+                          + "See the javascript console for the full traceback.</p>"
+                          + '</div>');
+          throw error;
+      }
+      const el = document.getElementById('vis');
+      vegaEmbed("#vis", spec, embedOpt)
+        .catch(error => showError(el, error));
+    })(vegaEmbed);
+
+  </script>
+</body>
+</html>
